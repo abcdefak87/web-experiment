@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test WebSocket Connection</title>
+</head>
+<body>
+    <h1>WebSocket Connection Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="messages"></div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://localhost:3001', {
+            transports: ['websocket', 'polling'],
+            reconnection: true
+        });
+
+        const status = document.getElementById('status');
+        const messages = document.getElementById('messages');
+
+        socket.on('connect', () => {
+            status.innerHTML = '✅ Connected!';
+            status.style.color = 'green';
+            console.log('Connected:', socket.id);
+            addMessage('Connected with ID: ' + socket.id);
+        });
+
+        socket.on('disconnect', () => {
+            status.innerHTML = '❌ Disconnected';
+            status.style.color = 'red';
+            console.log('Disconnected');
+            addMessage('Disconnected');
+        });
+
+        socket.on('connect_error', (error) => {
+            status.innerHTML = '❌ Connection Error: ' + error.message;
+            status.style.color = 'red';
+            console.error('Connection error:', error);
+            addMessage('Error: ' + error.message);
+        });
+
+        socket.on('reconnecting', (attempt) => {
+            status.innerHTML = '🔌 Reconnecting... (attempt ' + attempt + ')';
+            status.style.color = 'orange';
+            console.log('Reconnecting:', attempt);
+        });
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            div.textContent = new Date().toLocaleTimeString() + ' - ' + msg;
+            messages.appendChild(div);
+        }
+
+        // Test ping every 5 seconds
+        setInterval(() => {
+            if (socket.connected) {
+                socket.emit('ping');
+                addMessage('Ping sent');
+            }
+        }, 5000);
+
+        socket.on('pong', () => {
+            addMessage('Pong received');
+        });
+    </script>
+</body>
+</html>

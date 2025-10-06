@@ -58,10 +58,10 @@ export class SocketClient extends EventEmitter {
     this.log(`Connecting to ${this.config.url}...`)
     this.isIntentionallyClosed = false
 
-    // Get JWT token from cookies
+    // Get JWT token from cookies (optional in development)
     const token = Cookies.get('token')
     
-    if (!token) {
+    if (!token && process.env.NODE_ENV !== 'development') {
       this.log('No authentication token found')
       this.emit('error', new Error('No authentication token'))
       throw new Error('Authentication token required')
@@ -75,13 +75,13 @@ export class SocketClient extends EventEmitter {
       reconnectionDelay: this.config.reconnectDelay,
       reconnectionDelayMax: 10000,
       timeout: 20000,
-      auth: {
+      auth: token ? {
         token: token
-      },
+      } : {},
       query: {
-        token: token,
-        userId: this.config.userId,
-        role: this.config.role
+        token: token || 'dev-token',
+        userId: this.config.userId || 'dev-user',
+        role: this.config.role || 'development'
       }
     })
 
