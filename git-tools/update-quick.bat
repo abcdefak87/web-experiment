@@ -90,12 +90,23 @@ if %errorlevel%==0 (
     if %errorlevel%==0 (
         echo ✅ Push berhasil!
         echo.
+        
+        REM Auto merge to main
+        echo 🔀 Auto-merging ke main...
+        git checkout main
+        git pull origin main
+        git merge develop --no-ff -m "🔀 auto-merge: develop -> main"
+        git push origin main
+        git checkout develop
+        echo ✅ Merged ke main!
+        echo.
+        
         echo 🎉 UPDATE SELESAI!
         echo.
         echo 📊 Summary:
         git log --oneline -1
         echo.
-        echo 🔗 Next: Buka GitHub untuk buat Pull Request
+        echo ✅ Develop & Main sudah sinkron!
     ) else (
         echo ⚠️ Push gagal, coba manual:
         echo    git push origin develop

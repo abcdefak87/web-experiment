@@ -11,6 +11,7 @@ echo    update start   - Start new update session
 echo    update commit  - Commit changes
 echo    update push    - Push to remote
 echo    update quick   - All-in-one update
+echo    update sync    - Sync develop to main
 echo.
 
 if "%1"=="" (
@@ -33,8 +34,10 @@ if "%1"=="status" (
     call git-tools\update-push.bat %2 %3 %4 %5
 ) else if "%1"=="quick" (
     call git-tools\update-quick.bat %2 %3 %4 %5
+) else if "%1"=="sync" (
+    call git-tools\update-sync.bat %2 %3 %4 %5
 ) else (
     echo ❌ Unknown command: %1
     echo.
-    echo Available: status, start, commit, push, quick
+    echo Available: status, start, commit, push, quick, sync
 )
