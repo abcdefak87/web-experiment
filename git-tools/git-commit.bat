@@ -26,4 +26,4 @@ if "%1"=="" (
     exit /b 1
 )
 
-node scripts\git-helper.js commit %*
+node git-tools\git-helper.js commit %*

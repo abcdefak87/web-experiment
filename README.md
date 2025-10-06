@@ -1,62 +1,22 @@
-# 🌐 ISP Management System
+# ISP Management System
 
-Sistem manajemen ISP (Internet Service Provider) terintegrasi dengan WhatsApp Bot untuk otomasi layanan pelanggan.
+Sistem manajemen ISP (Internet Service Provider) dengan integrasi WhatsApp bot.
 
-## 📋 Daftar Isi
+## 🚀 Fitur Utama
 
-- [Fitur](#-fitur)
-- [Teknologi](#-teknologi)
-- [Instalasi](#-instalasi)
-- [Git Convention](#-git-convention)
-- [Struktur Project](#-struktur-project)
-- [Development](#-development)
-- [Production](#-production)
+- **Dashboard Real-time** - Monitoring pekerjaan, teknisi, dan pelanggan
+- **Manajemen Pekerjaan** - PSB (Pasang Baru) dan Gangguan  
+- **WhatsApp Bot** - Komunikasi otomatis dengan pelanggan
+- **Role-based Access** - Multi-level user management
+- **Inventory** - Manajemen stok peralatan
 
-## ✨ Fitur
+## 🏗️ Tech Stack
 
-### Customer Management
-- Registrasi dan manajemen pelanggan
-- Tracking status pelanggan (aktif/nonaktif)
-- Riwayat pembayaran
-- Dashboard pelanggan
-
-### Billing System
-- Generate invoice otomatis
-- Multiple payment methods
-- Payment tracking
-- Laporan keuangan
-
-### WhatsApp Integration
-- Bot otomatis untuk customer service
-- Notifikasi tagihan via WhatsApp
-- Cek status layanan via WhatsApp
-- Request support ticket
-
-### Network Monitoring
-- Monitoring bandwidth usage
-- Status koneksi real-time
-- Alert system untuk downtime
-
-## 🛠 Teknologi
-
-### Frontend
-- Next.js 14
-- React 18
-- TypeScript
-- Tailwind CSS
-- Shadcn/ui components
-
-### Backend
-- Node.js
-- Express.js
-- Prisma ORM
-- PostgreSQL/MySQL
-- JWT Authentication
-
-### WhatsApp Bot
-- @whiskeysockets/baileys
-- QR Code authentication
-- Session management
+- **Frontend**: Next.js 14 + TypeScript + Tailwind CSS
+- **Backend**: Node.js + Express + Prisma ORM
+- **Database**: SQLite / PostgreSQL
+- **WhatsApp**: Baileys WhatsApp Web API
+- **Auth**: JWT + Session management
 
 ## 📦 Instalasi
 
@@ -94,7 +54,7 @@ cp .env.example .env
 4. Setup Git Convention:
 ```bash
 # Di root directory
-setup-git-convention.bat
+git-tools\setup-git-convention.bat
 ```
 
 ## 🚀 Quick Update Workflow
@@ -102,23 +62,23 @@ setup-git-convention.bat
 ### Update Cepat (Recommended)
 ```bash
 # Edit files, lalu:
-update-quick.bat "deskripsi update"
+update quick "deskripsi update"
 
 # Contoh:
-update-quick.bat "perbaiki bug login"
-update-quick.bat "tambah fitur export PDF"
+update quick "perbaiki bug login"
+update quick "tambah fitur export PDF"
 ```
 
 ### Update Commands
 | Command | Fungsi |
 |---------|--------|
-| `update-quick.bat` | All-in-one: commit & push |
-| `update-start.bat` | Mulai session update |
-| `update-commit.bat` | Commit perubahan |
-| `update-push.bat` | Push ke remote |
-| `update-status.bat` | Cek status |
+| `update quick` | All-in-one: commit & push |
+| `update start` | Mulai session update |
+| `update commit` | Commit perubahan |
+| `update push` | Push ke remote |
+| `update status` | Cek status |
 
-📖 Baca [UPDATE-GUIDE.md](./UPDATE-GUIDE.md) untuk panduan lengkap.
+📖 Baca [UPDATE-GUIDE.md](./git-tools/UPDATE-GUIDE.md) untuk panduan lengkap.
 
 ## 🔀 Git Convention
 
@@ -151,20 +111,20 @@ Format: `<emoji> <type>: <deskripsi>`
 
 **Membuat branch baru:**
 ```bash
-git-branch.bat feature dashboard-baru
+git-tools\git-branch.bat feature dashboard-baru
 ```
 
 **Membuat commit:**
 ```bash
-git-commit.bat feat "tambah halaman dashboard"
+git-tools\git-commit.bat feat "tambah halaman dashboard"
 ```
 
 **Lihat panduan lengkap:**
 ```bash
-node scripts\git-helper.js help
+node git-tools\git-helper.js help
 ```
 
-📖 Baca [GIT_CONVENTION.md](./GIT_CONVENTION.md) untuk panduan lengkap.
+📖 Baca [GIT_CONVENTION.md](./git-tools/GIT_CONVENTION.md) untuk panduan lengkap.
 
 ## 📁 Struktur Project
 
@@ -182,24 +142,23 @@ web-siap-experiment/
 │   ├── prisma/          # Database schema
 │   └── services/        # Business logic
 │
-├── scripts/              # Utility scripts
-│   ├── whatsapp-bot-integrated.js  # WhatsApp bot
-│   ├── git-helper.js              # Git helper
-│   └── rebuild-frontend.bat      # Build script
+├── scripts/              # System scripts
+│   └── whatsapp-bot-integrated.js  # WhatsApp bot
 │
-└── auth_info_baileys/    # WhatsApp session
+├── git-tools/           # Git workflow tools  
+│   ├── update-*.bat    # Update commands
+│   ├── git-*.bat       # Git helpers
+│   └── git-helper.js   # Core helper
+│
+└── auth_info_baileys/   # WhatsApp session
 ```
 
 ## 🚀 Development
 
 ### Start Development Server
 
-**Windows:**
-```bash
-start-dev.bat
-```
+**Manual start:**
 
-Atau manual:
 ```bash
 # Terminal 1 - Backend
 cd server
@@ -219,9 +178,10 @@ npm run dev
 
 ### Build & Deploy
 
-**Windows:**
+**Build production:**
 ```bash
-start-production.bat
+cd client && npm run build
+cd ../server && npm run build
 ```
 
 ### Environment Production
@@ -246,29 +206,22 @@ cd server
 npx prisma migrate reset
 
 # Update schema
-npx prisma migrate dev
-```
-
 ### Build Issues
 ```bash
-# Rebuild frontend
-scripts\rebuild-frontend.bat
-
 # Clear cache
 npm cache clean --force
 ```
 
 ## 📊 Git Workflow Example
-
 ### 1. Mulai fitur baru:
 ```bash
 # Create branch
-git-branch.bat feature payment-gateway
+git-tools\git-branch.bat feature payment-gateway
 
 # Work on feature...
 
 # Commit changes
-git-commit.bat feat "integrasi payment gateway midtrans"
+git-tools\git-commit.bat feat "integrasi payment gateway midtrans"
 
 # Push to remote
 git push -u origin feature/payment-gateway
@@ -277,12 +230,12 @@ git push -u origin feature/payment-gateway
 ### 2. Fix bug:
 ```bash
 # Create bugfix branch
-git-branch.bat bugfix form-validation
+git-tools\git-branch.bat bugfix form-validation
 
 # Fix the bug...
 
 # Commit
-git-commit.bat fix "validasi email format di form registrasi"
+git-tools\git-commit.bat fix "validasi email format di form registrasi"
 
 # Push
 git push
@@ -295,12 +248,12 @@ git checkout main
 git pull
 
 # Create hotfix
-git-branch.bat hotfix payment-crash
+git-tools\git-branch.bat hotfix payment-crash
 
 # Fix critical issue...
 
 # Commit
-git-commit.bat hotfix "perbaiki crash saat proses payment"
+git-tools\git-commit.bat hotfix "perbaiki crash saat proses payment"
 
 # Push and create PR to main
 git push
@@ -309,8 +262,8 @@ git push
 ## 🤝 Contributing
 
 1. Fork repository
-2. Buat branch fitur (`git-branch.bat feature amazing-feature`)
-3. Commit perubahan (`git-commit.bat feat "tambah fitur amazing"`)
+2. Buat branch fitur (`git-tools\git-branch.bat feature amazing-feature`)
+3. Commit perubahan (`git-tools\git-commit.bat feat "tambah fitur amazing"`)
 4. Push ke branch (`git push origin feature/amazing-feature`)
 5. Buat Pull Request
 

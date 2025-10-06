@@ -24,4 +24,4 @@ if "%1"=="" (
     exit /b 1
 )
 
-node scripts\git-helper.js branch %*
+node git-tools\git-helper.js branch %*
