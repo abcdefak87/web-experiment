@@ -1,0 +1,17 @@
+{
+  "name": "isp-management-system",
+  "version": "1.0.0",
+  "description": "ISP Management System with WhatsApp Integration",
+  "scripts": {
+    "setup": "setup-dev.bat",
+    "dev": "start-dev.bat",
+    "whatsapp": "node scripts/whatsapp-bot-integrated.js"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "^7.0.0-rc.4",
+    "pino": "^9.13.1",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
