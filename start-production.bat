@@ -1,0 +1,3 @@
+@echo off
+echo Starting UNNET Management System in PRODUCTION mode...
+node start-all.js prod %*

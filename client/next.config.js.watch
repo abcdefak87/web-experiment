@@ -1,0 +1,22 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
+    webpackBuildWorker: true,
+  },
+  // Enable watch mode for production build
+  webpack: (config, { isServer }) => {
+    if (process.env.WATCH_MODE === 'true') {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: /node_modules/,
+      };
+    }
+    return config;
+  },
+}
+
+module.exports = nextConfig
