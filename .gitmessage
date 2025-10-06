@@ -1,0 +1,31 @@
+# Format Commit Message (Bahasa Indonesia)
+# <tipe>: <deskripsi singkat>
+#
+# Tipe yang tersedia:
+# ✨ feat     : Fitur baru
+# 🐛 fix      : Perbaikan bug
+# 📝 docs     : Perubahan dokumentasi
+# 🎨 style    : Format, tidak ada perubahan kode
+# ♻️ refactor : Refaktor kode
+# ⚡ perf     : Peningkatan performa
+# ✅ test     : Menambah test
+# 🔧 chore    : Perubahan build atau tools
+# 🚀 deploy   : Deploy ke production
+# 🔀 merge    : Merge branch
+# ⏪ revert   : Revert commit sebelumnya
+# 🚧 wip      : Work in progress
+# 🔐 security : Perbaikan keamanan
+# 🗑️ remove   : Hapus file/kode
+# 📦 deps     : Update dependencies
+#
+# Contoh:
+# feat: tambah fitur login dengan OTP
+# fix: perbaiki error validasi form customer
+# docs: update panduan instalasi
+#
+# Branch naming:
+# feature/<nama-fitur>
+# bugfix/<nama-bug>
+# hotfix/<nama-hotfix>
+# release/<versi>
+# chore/<deskripsi>

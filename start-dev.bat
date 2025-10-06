@@ -1,3 +1,0 @@
-@echo off
-echo Starting UNNET Management System in DEVELOPMENT mode...
-node start-all.js dev %*
