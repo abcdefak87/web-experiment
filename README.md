@@ -1,308 +1,330 @@
-# ISP Management System
+# 🌐 ISP Management System
 
-Sistem manajemen ISP (Internet Service Provider) yang komprehensif dengan integrasi WhatsApp bot untuk komunikasi real-time dengan pelanggan dan teknisi.
+Sistem manajemen ISP (Internet Service Provider) terintegrasi dengan WhatsApp Bot untuk otomasi layanan pelanggan.
 
-## 🚀 Fitur Utama
+## 📋 Daftar Isi
 
-- **Dashboard Real-time** - Monitoring pekerjaan, teknisi, dan pelanggan
-- **Manajemen Pekerjaan** - PSB (Pasang Baru) dan Gangguan
-- **Sistem Teknisi** - Assignment dan tracking pekerjaan
-- **WhatsApp Bot** - Komunikasi otomatis dengan pelanggan
-- **Manajemen User** - Role-based access control
-- **Inventory Management** - Manajemen stok peralatan
-- **Reporting** - Laporan dan analytics
-- **Mobile Responsive** - Optimized untuk mobile dan desktop
+- [Fitur](#-fitur)
+- [Teknologi](#-teknologi)
+- [Instalasi](#-instalasi)
+- [Git Convention](#-git-convention)
+- [Struktur Project](#-struktur-project)
+- [Development](#-development)
+- [Production](#-production)
 
-## 🏗️ Arsitektur
+## ✨ Fitur
 
-- **Frontend**: Next.js 14 + TypeScript + Tailwind CSS
-- **Backend**: Node.js + Express + Prisma ORM
-- **Database**: SQLite (Development) / PostgreSQL (Production)
-- **Real-time**: Socket.IO + WebSocket
-- **WhatsApp**: Baileys WhatsApp Web API
-- **Authentication**: JWT + Role-based permissions
+### Customer Management
+- Registrasi dan manajemen pelanggan
+- Tracking status pelanggan (aktif/nonaktif)
+- Riwayat pembayaran
+- Dashboard pelanggan
 
-## 📋 Prasyarat
+### Billing System
+- Generate invoice otomatis
+- Multiple payment methods
+- Payment tracking
+- Laporan keuangan
 
+### WhatsApp Integration
+- Bot otomatis untuk customer service
+- Notifikasi tagihan via WhatsApp
+- Cek status layanan via WhatsApp
+- Request support ticket
+
+### Network Monitoring
+- Monitoring bandwidth usage
+- Status koneksi real-time
+- Alert system untuk downtime
+
+## 🛠 Teknologi
+
+### Frontend
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Shadcn/ui components
+
+### Backend
+- Node.js
+- Express.js
+- Prisma ORM
+- PostgreSQL/MySQL
+- JWT Authentication
+
+### WhatsApp Bot
+- @whiskeysockets/baileys
+- QR Code authentication
+- Session management
+
+## 📦 Instalasi
+
+### Prerequisites
 - Node.js 18+ 
-- npm atau yarn
+- PostgreSQL/MySQL
 - Git
 
-## 🛠️ Setup Development
+### Setup Environment
 
-### 1. Clone Repository
-
+1. Clone repository:
 ```bash
-git clone https://github.com/abcdefak87/tahapdev.git
-cd tahapdev
+git clone [repository-url]
+cd web-siap-experiment
 ```
 
-### 2. Install Dependencies
-
-```bash
-# Install root dependencies
-npm install
-
-# Install client dependencies
-cd client
-npm install
-
-# Install server dependencies
-cd ../server
-npm install
-```
-
-### 3. Setup Environment Variables
-
-```bash
-# Copy environment examples
-cp client/env.example client/.env.local
-cp server/env.example server/.env
-
-# Edit the .env files with your configuration
-```
-
-### 4. Setup Database
-
+2. Setup backend:
 ```bash
 cd server
-npx prisma generate
-npx prisma db push
-npx prisma db seed
+npm install
+cp .env.example .env
+# Edit .env dengan konfigurasi database Anda
+npx prisma migrate dev
+npm run seed
 ```
 
-### 5. Start Development Servers
-
+3. Setup frontend:
 ```bash
-# From root directory
-npm run dev
-
-# Or start individually:
-# Terminal 1 - Server
-cd server && npm run dev
-
-# Terminal 2 - Client  
-cd client && npm run dev
-
-# Terminal 3 - WhatsApp Bot
-node scripts/whatsapp-bot-integrated.js
+cd ../client
+npm install
+cp .env.example .env
+# Edit .env dengan API URL
 ```
 
-## 🚀 Setup Production
-
-### 1. Environment Configuration
-
+4. Setup Git Convention:
 ```bash
-# Production environment variables
-NODE_ENV=production
-PORT=3001
-DATABASE_URL="postgresql://user:password@localhost:5432/isp_management"
-JWT_SECRET=your-production-jwt-secret
-FRONTEND_URL=https://yourdomain.com
+# Di root directory
+setup-git-convention.bat
 ```
 
-### 2. Database Setup
+## 🚀 Quick Update Workflow
 
+### Update Cepat (Recommended)
 ```bash
-# For PostgreSQL production
-cd server
-npx prisma generate
-npx prisma migrate deploy
-npx prisma db seed
+# Edit files, lalu:
+update-quick.bat "deskripsi update"
+
+# Contoh:
+update-quick.bat "perbaiki bug login"
+update-quick.bat "tambah fitur export PDF"
 ```
 
-### 3. Build Application
+### Update Commands
+| Command | Fungsi |
+|---------|--------|
+| `update-quick.bat` | All-in-one: commit & push |
+| `update-start.bat` | Mulai session update |
+| `update-commit.bat` | Commit perubahan |
+| `update-push.bat` | Push ke remote |
+| `update-status.bat` | Cek status |
 
+📖 Baca [UPDATE-GUIDE.md](./UPDATE-GUIDE.md) untuk panduan lengkap.
+
+## 🔀 Git Convention
+
+Project ini menggunakan conventional commits dengan branch naming yang terstruktur. Visual commit akan tampil menarik di GitHub dengan emoji dan format yang konsisten.
+
+### 🌿 Branch Naming
+
+| Prefix | Penggunaan | Contoh |
+|--------|------------|--------|
+| `feature/` | Fitur baru | `feature/dashboard-pelanggan` |
+| `bugfix/` | Perbaikan bug | `bugfix/validasi-form` |
+| `hotfix/` | Fix urgent production | `hotfix/crash-login` |
+| `release/` | Release version | `release/v1.2.0` |
+
+### 📝 Commit Format
+
+Format: `<emoji> <type>: <deskripsi>`
+
+| Emoji | Type | Penggunaan |
+|-------|------|------------|
+| ✨ | feat | Fitur baru |
+| 🐛 | fix | Perbaikan bug |
+| 📝 | docs | Update dokumentasi |
+| 🎨 | style | Format kode |
+| ♻️ | refactor | Refaktor kode |
+| ⚡ | perf | Peningkatan performa |
+| 🔥 | hotfix | Hotfix critical |
+
+### 🛠️ Helper Commands
+
+**Membuat branch baru:**
 ```bash
-# Build client
-cd client
-npm run build
-
-# Build server (if needed)
-cd ../server
-npm run build
+git-branch.bat feature dashboard-baru
 ```
 
-### 4. Start Production
-
+**Membuat commit:**
 ```bash
-# Using PM2 (recommended)
-npm install -g pm2
-
-# Start all services
-pm2 start ecosystem.config.js
-
-# Or using the start script
-node start-all.js prod
+git-commit.bat feat "tambah halaman dashboard"
 ```
 
-### 5. Nginx Configuration (Optional)
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-
-    # Frontend
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    # Backend API
-    location /api {
-        proxy_pass http://localhost:3001;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    # WebSocket
-    location /socket.io {
-        proxy_pass http://localhost:3001;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-    }
-}
-```
-
-## 📱 WhatsApp Bot Setup
-
-### 1. First Time Setup
-
-1. Start the application
-2. Open `http://localhost:3001/qr/whatsapp-qr.png`
-3. Scan QR code with WhatsApp
-4. Bot will be connected automatically
-
-### 2. Bot Commands
-
-- `/jobs` - Lihat pekerjaan tersedia
-- `/myjobs` - Lihat pekerjaan yang diambil
-- `/ambil <job_id>` - Ambil pekerjaan
-- `/mulai <job_id>` - Mulai pekerjaan
-- `/selesai <job_id>` - Selesaikan pekerjaan
-- `/stats` - Lihat statistik
-
-## 👥 User Roles
-
-- **Super Admin** - Full access
-- **Admin** - Management access
-- **Gudang** - Inventory management
-- **Teknisi** - Job assignment and completion
-
-## 🔧 Development Commands
-
+**Lihat panduan lengkap:**
 ```bash
-# Database
-npm run db:migrate    # Run migrations
-npm run db:seed       # Seed database
-npm run db:studio     # Open Prisma Studio
-
-# Development
-npm run dev           # Start all services
-npm run build         # Build for production
-npm run start         # Start production
-
-# Utilities
-npm run clean         # Clean build files
-npm run test          # Run tests
-npm run lint          # Run linter
+node scripts\git-helper.js help
 ```
+
+📖 Baca [GIT_CONVENTION.md](./GIT_CONVENTION.md) untuk panduan lengkap.
 
 ## 📁 Struktur Project
 
 ```
-├── client/                 # Next.js Frontend
-│   ├── components/         # React Components
-│   ├── pages/             # Next.js Pages
-│   ├── lib/               # Utilities
-│   └── styles/            # CSS Styles
-├── server/                # Express Backend
-│   ├── routes/            # API Routes
-│   ├── middleware/        # Express Middleware
-│   ├── services/          # Business Logic
-│   ├── prisma/            # Database Schema
-│   └── utils/             # Utilities
-├── scripts/               # Utility Scripts
-└── docs/                  # Documentation
+web-siap-experiment/
+├── client/                 # Frontend Next.js
+│   ├── components/        # React components
+│   ├── pages/            # Page routes
+│   ├── lib/              # Utility functions
+│   └── styles/           # CSS styles
+│
+├── server/                # Backend Express
+│   ├── routes/           # API endpoints
+│   ├── middleware/       # Express middleware
+│   ├── prisma/          # Database schema
+│   └── services/        # Business logic
+│
+├── scripts/              # Utility scripts
+│   ├── whatsapp-bot-integrated.js  # WhatsApp bot
+│   ├── git-helper.js              # Git helper
+│   └── rebuild-frontend.bat      # Build script
+│
+└── auth_info_baileys/    # WhatsApp session
 ```
 
-## 🔒 Security
+## 🚀 Development
 
-- JWT Authentication
-- Role-based Access Control
-- Rate Limiting
-- Input Validation
-- SQL Injection Protection (Prisma)
-- CORS Configuration
-- Environment Variables Protection
+### Start Development Server
 
-## 📊 Monitoring
+**Windows:**
+```bash
+start-dev.bat
+```
 
-- Application logs in `server/logs/`
-- WhatsApp bot status monitoring
-- Database query logging
-- Error tracking and reporting
+Atau manual:
+```bash
+# Terminal 1 - Backend
+cd server
+npm run dev
+
+# Terminal 2 - Frontend  
+cd client
+npm run dev
+```
+
+### Access Points
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
+- WhatsApp Bot: Running in background
+
+## 📦 Production
+
+### Build & Deploy
+
+**Windows:**
+```bash
+start-production.bat
+```
+
+### Environment Production
+
+Pastikan environment variables production sudah di-set:
+- Database production
+- JWT secrets
+- API keys
+- WhatsApp credentials
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### WhatsApp Bot Issues
+1. Hapus folder `auth_info_baileys` untuk reset session
+2. Scan ulang QR code
+3. Pastikan nomor WhatsApp aktif
 
-1. **WhatsApp Bot Not Connecting**
-   - Check QR code at `/qr/whatsapp-qr.png`
-   - Restart WhatsApp bot service
-   - Clear session files if needed
+### Database Issues
+```bash
+# Reset database
+cd server
+npx prisma migrate reset
 
-2. **Database Connection Issues**
-   - Check DATABASE_URL in .env
-   - Run `npx prisma generate`
-   - Check database permissions
+# Update schema
+npx prisma migrate dev
+```
 
-3. **Build Errors**
-   - Clear node_modules and reinstall
-   - Check Node.js version (18+)
-   - Run `npm run clean` before build
+### Build Issues
+```bash
+# Rebuild frontend
+scripts\rebuild-frontend.bat
 
-### Logs Location
+# Clear cache
+npm cache clean --force
+```
 
-- Server logs: `server/logs/`
-- WhatsApp bot logs: Console output
-- Client logs: Browser console
+## 📊 Git Workflow Example
+
+### 1. Mulai fitur baru:
+```bash
+# Create branch
+git-branch.bat feature payment-gateway
+
+# Work on feature...
+
+# Commit changes
+git-commit.bat feat "integrasi payment gateway midtrans"
+
+# Push to remote
+git push -u origin feature/payment-gateway
+```
+
+### 2. Fix bug:
+```bash
+# Create bugfix branch
+git-branch.bat bugfix form-validation
+
+# Fix the bug...
+
+# Commit
+git-commit.bat fix "validasi email format di form registrasi"
+
+# Push
+git push
+```
+
+### 3. Hotfix production:
+```bash
+# Switch to main
+git checkout main
+git pull
+
+# Create hotfix
+git-branch.bat hotfix payment-crash
+
+# Fix critical issue...
+
+# Commit
+git-commit.bat hotfix "perbaiki crash saat proses payment"
+
+# Push and create PR to main
+git push
+```
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+1. Fork repository
+2. Buat branch fitur (`git-branch.bat feature amazing-feature`)
+3. Commit perubahan (`git-commit.bat feat "tambah fitur amazing"`)
+4. Push ke branch (`git push origin feature/amazing-feature`)
+5. Buat Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+ISP Management System - All Rights Reserved
 
 ## 📞 Support
 
-For support and questions:
-- Create an issue on GitHub
-- Contact: [Your Contact Information]
-
-## 🔄 Updates
-
-- **v1.0.0** - Initial release
-- **v1.1.0** - WhatsApp bot integration
-- **v1.2.0** - Mobile optimization
-- **v1.3.0** - Role-based access control
+Untuk bantuan dan pertanyaan:
+- 📧 Email: support@isp-system.com
+- 💬 WhatsApp: +62xxx
+- 📖 Docs: [Documentation](./docs)
 
 ---
 
-**Note**: Pastikan untuk tidak mengupload file sensitif seperti session WhatsApp, database, atau environment variables ke repository.
+⭐ **Happy Coding!** Jangan lupa follow git convention untuk commit yang rapi dan visual menarik di GitHub!
