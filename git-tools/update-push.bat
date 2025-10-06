@@ -34,21 +34,9 @@ if %errorlevel%==0 (
     echo.
     echo ✅ Push berhasil!
     echo.
-    
-    REM Auto merge to main if on develop
-    if "%CURRENT_BRANCH%"=="develop" (
-        echo 🔀 Auto-merging ke main...
-        git checkout main
-        git pull origin main
-        git merge develop --no-ff -m "🔀 auto-merge: develop -> main"
-        git push origin main
-        git checkout develop
-        echo ✅ Merged ke main!
-    )
-    
-    echo.
-    echo 💡 Lanjut kerja:
-    echo    update-start.bat - Mulai update baru
+    echo 💡 Next steps:
+    echo    - Buat Pull Request di GitHub untuk merge ke main
+    echo    - Atau lanjut kerja dengan update-start.bat
 ) else (
     echo.
     echo ❌ Push gagal!
