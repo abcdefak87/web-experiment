@@ -69,13 +69,16 @@ update quick "perbaiki bug login"
 update quick "tambah fitur export PDF"
 ```
 
+**⚡ Auto-Merge:** Setiap update di `develop` akan otomatis di-merge ke `main`!
+
 ### Update Commands
 | Command | Fungsi |
 |---------|--------|
-| `update quick` | All-in-one: commit & push |
+| `update quick` | All-in-one: commit, push & auto-merge |
 | `update start` | Mulai session update |
 | `update commit` | Commit perubahan |
-| `update push` | Push ke remote |
+| `update push` | Push ke remote & auto-merge |
+| `update sync` | Manual sync develop -> main |
 | `update status` | Cek status |
 
 📖 Baca [UPDATE-GUIDE.md](./git-tools/UPDATE-GUIDE.md) untuk panduan lengkap.
