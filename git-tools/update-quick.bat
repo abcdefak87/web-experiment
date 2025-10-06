@@ -29,8 +29,12 @@ echo ⚡ QUICK UPDATE MODE
 echo ====================
 echo.
 
-REM Save the message
-set MESSAGE=%~1
+REM Save the message safely
+set "MESSAGE=%~1"
+if "%MESSAGE%"=="" (
+    echo ❌ Error: Empty message!
+    exit /b 1
+)
 
 REM Check current branch
 for /f "tokens=*" %%i in ('git branch --show-current') do set CURRENT_BRANCH=%%i
@@ -74,10 +78,10 @@ REM Stage all
 echo 📦 Stage semua perubahan...
 git add .
 
-REM Commit
-set COMMIT_MSG=%EMOJI% %TYPE%: %MESSAGE%
+REM Commit with proper escaping
+set "COMMIT_MSG=%EMOJI% %TYPE%: %MESSAGE%"
 echo 💾 Commit: %COMMIT_MSG%
-git commit -m "%COMMIT_MSG%"
+git commit -m "%EMOJI% %TYPE%: %MESSAGE%"
 
 if %errorlevel%==0 (
     echo ✅ Commit berhasil!

@@ -131,8 +131,9 @@ function createCommit(type, message) {
         // Stage all changes
         executeGitCommand('git add .');
         
-        // Commit with message
-        executeGitCommand(`git commit -m "${commitMessage}"`);
+        // Commit with message (escape quotes properly)
+        const escapedMessage = commitMessage.replace(/"/g, '\\"');
+        executeGitCommand(`git commit -m "${escapedMessage}"`);
         console.log('✅ Commit berhasil!');
         
         // Show commit info

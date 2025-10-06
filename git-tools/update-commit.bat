@@ -19,8 +19,14 @@ echo 💬 COMMIT UPDATE
 echo ================
 echo.
 
+REM Get full message safely
+set "MESSAGE=%~1"
+if "%MESSAGE%"=="" (
+    echo ❌ Error: Empty message!
+    exit /b 1
+)
+
 REM Auto detect type based on keywords
-set MESSAGE=%~1
 set TYPE=feat
 set EMOJI=✨
 
@@ -81,11 +87,12 @@ REM Stage all changes
 echo 📦 Staging semua perubahan...
 git add .
 
-REM Commit with auto-detected type
-set COMMIT_MSG=%EMOJI% %TYPE%: %MESSAGE%
+REM Commit with proper escaping
+set "COMMIT_MSG=%EMOJI% %TYPE%: %MESSAGE%"
 echo.
 echo 💾 Committing: %COMMIT_MSG%
-git commit -m "%COMMIT_MSG%"
+REM Use delayed expansion for safer commit
+git commit -m "%EMOJI% %TYPE%: %MESSAGE%"
 
 if %errorlevel%==0 (
     echo.
